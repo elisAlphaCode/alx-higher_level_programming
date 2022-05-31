@@ -2,4 +2,4 @@
 
 for letter in range(97, 123):
     if letter != 101 and letter != 113:
-        print(f"{letter:c}", end='')
+        print("{:c}".format(letter), end='')
