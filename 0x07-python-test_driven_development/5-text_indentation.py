@@ -19,4 +19,3 @@ def text_indentation(text):
     lines = text.splitlines()
     for index, line in enumerate(lines):
         print(line.strip(), end='' if index == len(lines) - 1 else '\n\n')
-        
