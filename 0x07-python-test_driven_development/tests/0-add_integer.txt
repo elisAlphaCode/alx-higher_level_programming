@@ -1,82 +1,91 @@
-Test cases for '0-add_integer.py'
-=================================
+The ``Add Integer`` module
+============================
 
-Adds two integers, with the function 'add_integer'
---------------------------------------------------
+Using ``add_integer``
+---------------------
 
-Import 'add_integer'
->>> add_integer = __import__('0-add_integer').add_integer
+First ``add_integer`` from the ``Add Integer`` module:
 
-Cases to be evaluated:
+    >>> add_integer = __import__("0-add_integer").add_integer
 
-Case #1: test with zero arguments
->>> add_integer()
-Traceback (most recent call last):
-...
-TypeError: add_integer() missing 1 required positional argument: 'a'
+Now use it:
 
-Case #2: test Null variable to 'a'
->>> add_integer(None, 1)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
+    >>> add_integer(1, 1)
+    2
 
-Case #3: test Null variable to 'b'
->>> add_integer(1, None)
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
+    >>> add_integer(1, 2.2)
+    3
 
-Case #4: test Null for both variables
->>> add_integer(None, None)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
+    >>> add_integer(2.2, 1)
+    3
 
-Case #5: test passing more than 2 argument
->>> add_integer(1, 1, 1)
-Traceback (most recent call last):
-...
-TypeError: add_integer() takes from 1 to 2 positional arguments but 3 were given
+    >>> add_integer(2.2, 2.2)
+    4
 
-Case #6: test 'a' such as string (int(b)).
->>> add_integer("Holberton", 98)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
+    >>> add_integer("String", 1)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
 
-Case #7: test 'b' such as string (int(a)).
->>> add_integer(98, "Holberton")
-Traceback (most recent call last):
-...
-TypeError: b must be an integer
+    >>> add_integer(1, "String")
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
 
-Case #8: test 'a' and 'b' such as string.
->>> add_integer("98", "Holberton")
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
+    >>> add_integer("String", "String")
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
 
-Case #9: test adds two arguments(int).
->>> add_integer(2, -2)
-0
+    >>> add_integer(1, [1, 2, 3])
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
 
-Case #10: test adding 1 argument(int).
->>> add_integer(2)
-100
+    >>> add_integer([1, 2, 3], 1)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
 
-Case #11: test adding between floats.
->>> add_integer(20.5, 0.5)
-20
+    >>> add_integer([1, 2, 3], [1, 2, 3])
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
 
-Case #12: test adding complex number to 'a', the same response apply to 'b'.
->>> add_integer(7+7j, 7)
-Traceback (most recent call last):
-...
-TypeError: a must be an integer
+    >>> add_integer(1, {1, 2, 3})
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
 
-Case #13: test adding an infinity number as an argument.
->>> add_integer(float('inf'), 1)
-Traceback (most recent call last):
-...
-OverflowError: cannot convert float infinity to integer
+    >>> add_integer({1, 2, 3}, 2)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+    >>> add_integer({1, 2, 3}, {1, 2, 3})
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+    >>> add_integer()
+    Traceback (most recent call last):
+        ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
+    >>> add_integer(2)
+    100
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('-inf'))
+    Traceback (most recent call last):
+        ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+        ...
+    ValueError: cannot convert float NaN to integer
