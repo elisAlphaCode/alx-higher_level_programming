@@ -7,8 +7,10 @@ Function that divides all element of a matrix.
 def matrix_divided(matrix, div):
     """
     Divide a matrix number by number.
+    
     matrix: matrix to be divided.
     div: number to divided the matrix.
+    
     Return: A list of list with the result.
     """
     newList = []
