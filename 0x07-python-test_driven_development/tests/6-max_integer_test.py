@@ -1,62 +1,42 @@
 #!/usr/bin/python3
-"""Unittest for max_integer([..])
+"""Unittests for max_integer
 """
 
-
 import unittest
+import random
+
+
 max_integer = __import__('6-max_integer').max_integer
 
 
 class TestMaxInteger(unittest.TestCase):
-    """
-    Test cases to be evaluated.
-    """
+    """Define unit test for the max_integer function"""
 
-    def test_max_end(self):
-        """Test max int of a list
-        """
-        _list = [1, 2, 3, 4]
-        self.assertEqual(max_integer(_list), 4)
+    def test_ordered_list(self):
+        self.assertEqual(max_integer([1, 2, 3, 4]), 4)
+    
+    def test_max_in_the_middle(self):
+        self.assertEqual(max_integer([1,2,3,7,4,5,6]), 7)
 
-    def test_max_first(self):
-        """Test max int of a list at the end
-        """
-        _list = [4, 1, 2, 3]
-        self.assertEqual(max_integer(_list), 4)
-
-    def test_max_middle(self):
-        """Test max int in the middle of a list
-        """
-        _list = [1, 4, 2, 3]
-        self.assertEqual(max_integer(_list), 4)
-
-    def test_max_negative(self):
-        """Checks the max negative int of a list
-        """
-        _list = [-1, -2, -3, -4]
-        self.assertEqual(max_integer(_list), -1)
-
-    def test_float(self):
-        """Checks the max float of a list
-        """
-        _list = [1, 2, 3.3, 4.5]
-        self.assertEqual(max_integer(_list), 4.5)
-
-    def test_string(self):
-        """Checks max int(within the list a string)
-        """
-        _list = [1, 2, '3', 4]
-        with self.assertRaises(TypeError):
-            max_integer(_list)
+    def test_unordered_list(self):
+        self.assertEqual(max_integer([4, 2, 3, 1]), 4)
 
     def test_empty_list(self):
-        """Checks the case of an empty list
-        """
-        _list = []
-        self.assertEqual(max_integer(_list), None)
+        self.assertEqual(max_integer([]), None)
 
-    def test_void_arg(self):
-        self.assertEqual(max_integer(), None)
+    def test_one_element_list(self):
+        self.assertEqual(max_integer([5]), 5)
+
+    def test_floats(self):
+        self.assertEqual(max_integer([1.5, 1.7, 2.8]), 2.8)
+
+    def test_string_implicit_ansii_values(self):
+        self.assertEqual(max_integer('abcd'), 'd')
+
+    def test_empty_string(self):
+        self.assertEqual(max_integer(''), None)
+
 
 if __name__ == '__main__':
     unittest.main()
+    
