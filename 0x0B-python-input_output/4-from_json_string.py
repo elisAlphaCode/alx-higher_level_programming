@@ -4,9 +4,6 @@
     List is then saved to a file.
 """
 
-
-
-
 import json
 import sys
 import os.path
