@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/python3
 """ module that contains the class Student """
 
