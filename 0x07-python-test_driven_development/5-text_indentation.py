@@ -1,24 +1,21 @@
 #!/usr/bin/python3
 """
-Function to replace some characters with '\n\n'
+This module defines `text_indentation`
+The function prints a text with 2 new lines after each of
+these characters: ., ? and :
 """
 
 
 def text_indentation(text):
+    """adds paragraph after `.`, `:` and `?`
+    Args:
+        text (str)
     """
-    Prints a text with 2 new lines after some characters.
-    """
+    if not isinstance(text, str):
+        raise TypeError('text must be a string')
 
-    if type(text) is not str:
-        raise TypeError("text must be a string")
-    tmp = text.replace(".", ".\n\n")
-    tmp = tmp.replace(":", ":\n\n")
-    tmp = tmp.replace("?", "?\n\n")
-    p = tmp.splitlines(True)
-    ls_strip = []
-    for l in p:
-        if l == "\n":
-            ls_strip.append("\n")
-        else:
-            ls_strip.append(l.lstrip())
-    print("".join(ls_strip), end="")
+    for l in '.:?':
+        text = text.replace(l, '{}\n'.format(l))
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        print(line.strip(), end='' if index == len(lines) - 1 else '\n\n')
