@@ -1,23 +1,12 @@
 #!/usr/bin/python3
-"""
-    Python script that adds all args to a Python List.
-    List is then saved to a file.
-"""
+""" module that contains from_json_string function """
+import json
 
 
-if __name__ == "__main__":
-    import sys
-    import json
-    save_to_json_file = \
-        __import__('7-save_to_json_file').save_to_json_file
-    load_from_json_file = \
-        __import__('8-load_from_json_file').load_from_json_file
-
-    filename = "add_item.json"
-    with open(filename, 'a+') as f:  # Create add_item.json, if necessary
-        if f.tell() == 0:
-            json.dump([], f)
-    file_data = load_from_json_file("add_item.json")
-    if len(sys.argv) > 1:
-        file_data.extend(sys.argv[1:])
-    save_to_json_file(file_data, filename)
+def from_json_string(my_str):
+    """
+    function that returns an object (Python data structure)
+    represented by a JSON string:
+    """
+    data = json.loads(my_str)
+    return data
