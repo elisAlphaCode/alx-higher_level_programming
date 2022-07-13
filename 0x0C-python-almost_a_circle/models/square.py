@@ -1,55 +1,86 @@
 #!/usr/bin/python3
 """
-This module implements a Square object
+Module class Square that inherits from Rectangle
 """
+
+
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Square implementation"""
-
-    def __init__(self, size: int, x=0, y=0, id=None):
-        """initialization
+    """
+    Square - class for a square, this class inherit form Rectangle
+    """
+    def __init__(self, size, x=0, y=0, id=None):
+        """
+        Constructor for square
+        Arguments:
+        @size: size of the rectangle
+        @x: position in x
+        @y: position in y
+        @id: amount of instances created
         """
         super().__init__(size, size, x, y, id)
-        self.__size = size
 
     @property
-    def size(self) -> int:
-        """size getter
-        """
-        return self.__size
+    def size(self):
+        """ Getter for width of square """
+        return self.width
 
     @size.setter
-    def size(self, value: int):
-        """size setter
-        """
-        self.__size = value
-        self.width = self.height = value
+    def size(self, value):
+        """ Setter for size of square """
+        if type(value) is not int:
+            raise TypeError('width must be an integer')
+        elif value <= 0:
+            raise ValueError('width must be > 0')
+        self.width = value
+        self.height = value
 
-    def __str__(self) -> str:
-        """string representation"""
-        id = self.id
-        size = self.__size
-        x = self.x
-        y = self.y
-        return "[Square] ({}) {}/{} - {}".format(id, x, y, size)
+    # magic methods
+
+    def __str__(self):
+        """
+        formats string representation of the Square
+        """
+        return ("[{}] ({}) {}/{} - {}".format(
+                self.__class__.__name__, self.id,
+                self.x, self.y, self.width))
+
+    # public methods
 
     def update(self, *args, **kwargs):
-        """update arguments"""
-        attr = ['id', 'size', 'x', 'y']
-        if args:
-            for at, numb in zip(attr, args):
-                setattr(self, at, numb)
-        elif kwargs:
+        """
+        update - assign the arguments to each attribute
+        @args: list of arguments
+        @kargs: dictionary of arguments, key represents
+        an attribute to the instance
+        """
+        if len(args) > 0:
+            if args[0] is not None:
+                self.id = args[0]
+            if len(args) > 1:
+                self.width = args[1]
+                self.height = args[1]
+            if len(args) > 2:
+                self.x = args[2]
+            if len(args) > 3:
+                self.y = args[3]
+        if not args:
             for key, value in kwargs.items():
-                if key in attr:
-                    setattr(self, key, value)
+                if key == 'id':
+                    self.id = value
+                if key == "size":
+                    self.width = value
+                    self.height = value
 
-    def to_dictionary(self) -> dict:
-        """square to dictionary"""
-        id = self.id
-        size = self.__size
-        x = self.x
-        y = self.y
-        return {'id': id, 'x': x, 'size': size, 'y': y}
+                if key == 'x':
+                    self.x = value
+                if key == 'y':
+                    self.y = value
+
+    def to_dictionary(self):
+        """
+        to_dictionary - returns a dictionary representation of a Square
+        """
+        return {'x': self.x, 'y': self.y, 'id': self.id, 'size': self.width}
