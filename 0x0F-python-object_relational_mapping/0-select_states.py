@@ -1,27 +1,28 @@
 #!/usr/bin/python3
+"""List all cities from the db
+Username, password, and database name given as user args
+Can only use execute() once
+Sort ascending order by cities.id
 """
-python script that lists all states from the database hbtn_0e_0_usa with a name
-starting with N
-"""
-import MySQLdb
 import sys
+import MySQLdb
 
-
-if __name__ == '__main__':
-    args = sys.argv
-    if len(args) != 4:
-        print("Usage: {} username password database_name".format(args[0]))
-        exit(1)
-    username = args[1]
-    password = args[2]
-    data = args[3]
-    db = MySQLdb.connect(host='localhost', user=username,
-                         passwd=password, db=data, port=3306)
+if __name__ == "__main__":
+    db = MySQLdb.connect(user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3],
+                         host='localhost',
+                         port=3306)
     cur = db.cursor()
-    num_rows = cur.execute("SELECT * FROM states WHERE states.name LIKE BINARY\
-                           'N%' ORDER BY states.id;")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    cmd = """SELECT cities.id, cities.name, states.name
+         FROM states
+         INNER JOIN cities ON states.id = cities.state_id
+         ORDER BY cities.id ASC"""
+    cur.execute(cmd)
+    allCities = cur.fetchall()
+
+    for city in allCities:
+        print(city)
+
     cur.close()
     db.close()
